@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ReactDOM } from "react";
+import ReactDOM from "react-dom";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -47,10 +47,10 @@ const ModalOverlay = ({ children }) => {
     </StyledModalOverlay>
   );
 };
-const Modal = ({ children }) => {
+const Modal = ({toggleModal, children }) => {
   return (
     <>
-      {ReactDOM.createPortal(<Backdrop />, document.querySelector("#overlays"))}
+      {ReactDOM.createPortal(<Backdrop onClick={toggleModal} />, document.querySelector("#overlays"))}
       {ReactDOM.createPortal(
         <ModalOverlay>{children}</ModalOverlay>,
         document.querySelector("#overlays")

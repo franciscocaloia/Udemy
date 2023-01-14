@@ -29,12 +29,12 @@ const StyledImgCnt = styled.div`
   }
 `;
 
-const Header = () => {
+const Header = ({toggleShowCart}) => {
   return (
     <>
       <StyledHeader>
         <h1>ReactMeals</h1>
-        <HeaderCartButton />
+        <HeaderCartButton toggleShowCart={toggleShowCart}/>
       </StyledHeader>
       <StyledImgCnt>
         <img src={mealsImg} alt="mealsImg" />

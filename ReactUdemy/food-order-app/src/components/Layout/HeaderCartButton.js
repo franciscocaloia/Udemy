@@ -58,9 +58,9 @@ const StyledButton = styled.button`
     }
   }
 `;
-const HeaderCartButton = () => {
+const HeaderCartButton = ({toggleShowCart}) => {
   return (
-    <StyledButton>
+    <StyledButton onClick={toggleShowCart}>
       <span className="icon">
         <CartIcon />
       </span>
