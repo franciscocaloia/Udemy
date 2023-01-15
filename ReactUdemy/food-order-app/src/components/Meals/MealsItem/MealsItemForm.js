@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Input from "../../UI/Input";
 const StyledForm = styled.form`
@@ -17,9 +18,15 @@ const StyledForm = styled.form`
     border-color: #641e03;
   }
 `;
-const MealsItemForm = ({ id }) => {
+
+const MealsItemForm = ({ id, onAdd }) => {
+  const [amount, setAmount] = useState(1);
+  function handleSubmit(event) {
+    event.preventDefault();
+    onAdd(+amount);
+  }
   return (
-    <StyledForm onSubmit={(e) => e.preventDefault()}>
+    <StyledForm onSubmit={handleSubmit}>
       <Input
         label="amount"
         input={{
@@ -27,7 +34,10 @@ const MealsItemForm = ({ id }) => {
           type: "number",
           min: "1",
           max: "10",
-          defaultValue: "1",
+          value: amount,
+          onChange: (amount) => {
+            setAmount(amount);
+          },
         }}
       />
       <button>+ Add</button>

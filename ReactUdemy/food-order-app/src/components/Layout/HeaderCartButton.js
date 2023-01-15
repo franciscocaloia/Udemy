@@ -1,4 +1,6 @@
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import CartContext from "../../store/cart-context";
 import CartIcon from "../Cart/CartIcon";
 const StyledButton = styled.button`
   cursor: pointer;
@@ -12,6 +14,8 @@ const StyledButton = styled.button`
   align-items: center;
   border-radius: 25px;
   font-weight: bold;
+  ${({ bump }) => bump && "animation: bump 300ms ease-out;"}
+
   &:hover,
   &:active {
     background-color: #2c0d00;
@@ -58,14 +62,32 @@ const StyledButton = styled.button`
     }
   }
 `;
-const HeaderCartButton = ({toggleShowCart}) => {
+const HeaderCartButton = ({ toggleShowCart }) => {
+  const [bump, setBump] = useState(false);
+  const cartContext = useContext(CartContext);
+  const { items } = cartContext;
+  useEffect(() => {
+    if (items.length > 0) {
+      setBump(true);
+    }
+    const timer = setTimeout(() => {
+      setBump(false);
+    }, 300);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [items]);
+  const totalItems = cartContext.items.reduce(
+    (prev, item) => prev + item.amount,
+    0
+  );
   return (
-    <StyledButton onClick={toggleShowCart}>
+    <StyledButton bump={bump} onClick={toggleShowCart}>
       <span className="icon">
         <CartIcon />
       </span>
       <span>Your Cart</span>
-      <span className="badge">3</span>
+      <span className="badge">{totalItems}</span>
     </StyledButton>
   );
 };

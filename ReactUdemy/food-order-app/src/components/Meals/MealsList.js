@@ -52,7 +52,7 @@ const StyledSection = styled.section`
 `;
 const MealsList = () => {
   const mealsList = DUMMY_MEALS.map((meal) => (
-    <MealsItem key={meal.id} {...meal} />
+    <MealsItem key={meal.id} item={meal} />
   ));
   return (
     <StyledSection>

@@ -18,10 +18,13 @@ const StyledInput = styled.div`
   }
 `;
 const Input = ({ label, input }) => {
+  function onChange(event) {
+    input.onChange(event.target.value);
+  }
   return (
     <StyledInput>
       <label htmlFor={input.id}>{label}</label>
-      <input {...input} />
+      <input {...input} onChange={onChange} />
     </StyledInput>
   );
 };

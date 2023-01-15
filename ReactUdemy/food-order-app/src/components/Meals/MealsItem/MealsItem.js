@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import CartContext from "../../../store/cart-context";
 import MealsItemForm from "./MealsItemForm";
 const StyledMealsItem = styled.li`
   display: flex;
@@ -20,7 +22,12 @@ const StyledMealsItem = styled.li`
     font-size: 1.25rem;
   }
 `;
-const MealsItem = ({ id, name, price, description }) => {
+const MealsItem = ({ item }) => {
+  const cartContext = useContext(CartContext);
+  const { id, name, price, description } = item;
+  function onAdd(amount) {
+    cartContext.addItem({ ...item, amount });
+  }
   return (
     <StyledMealsItem>
       <div>
@@ -29,7 +36,7 @@ const MealsItem = ({ id, name, price, description }) => {
         <div className="price">${price.toFixed(2)}</div>
       </div>
       <div>
-        <MealsItemForm id={id} />
+        <MealsItemForm id={id} onAdd={onAdd} />
       </div>
     </StyledMealsItem>
   );
