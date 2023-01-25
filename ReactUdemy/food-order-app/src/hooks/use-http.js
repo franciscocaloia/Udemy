@@ -9,9 +9,8 @@ const useHttp = () => {
       const res = await fetch(url, cfg);
       const data = await res.json();
       if (!res.ok) {
-        throw new Error(`Codigo de error ${res.status}`);
+        throw new Error(`Error code ${res.status}`);
       }
-      console.log(data);
       dataProcessor(data);
     } catch (err) {
       setError(err.message);

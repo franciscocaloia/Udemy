@@ -23,10 +23,8 @@ const StyledModalOverlay = styled.div`
   animation: slide-down 300ms ease-out forwards;
 
   @media (min-width: 768px) {
-    .modal {
-      width: 40rem;
-      left: calc(50% - 20rem);
-    }
+    width: 40rem;
+    left: calc(50% - 20rem);
   }
 
   @keyframes slide-down {
@@ -47,10 +45,13 @@ const ModalOverlay = ({ children }) => {
     </StyledModalOverlay>
   );
 };
-const Modal = ({toggleModal, children }) => {
+const Modal = ({ toggleModal, children }) => {
   return (
     <>
-      {ReactDOM.createPortal(<Backdrop onClick={toggleModal} />, document.querySelector("#overlays"))}
+      {ReactDOM.createPortal(
+        <Backdrop onClick={toggleModal} />,
+        document.querySelector("#overlays")
+      )}
       {ReactDOM.createPortal(
         <ModalOverlay>{children}</ModalOverlay>,
         document.querySelector("#overlays")
