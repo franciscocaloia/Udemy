@@ -3,7 +3,6 @@ import React, { useReducer } from "react";
 function cartReducer(state, action) {
   switch (action.type) {
     case "ADD": {
-      console.log("hola");
       let updated = false;
       const updatedItems = state.items.map((item) => {
         if (item.id === action.item.id) {

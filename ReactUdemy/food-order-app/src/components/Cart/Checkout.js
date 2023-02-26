@@ -68,7 +68,6 @@ const StyledForm = styled.form`
 `;
 
 const isNotEmpty = (value) => {
-  console.log(value);
   return value.trim() !== "";
 };
 
